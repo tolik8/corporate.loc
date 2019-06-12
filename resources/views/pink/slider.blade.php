@@ -9,17 +9,18 @@
         <div class="slide-holder" style="background:  url('{{ asset(env('THEME')) }}/images/{{ $slider->img }}') no-repeat center center" style="height:483px;">
             <div class="slide-content-holder inner" style="height:483px;">
                 @if ($i%2 !== 0)
-                    <div class="slide-content-holder-content" style="position: absolute; top:30px;right:650px;">
+                    @php ($styles = 'position: absolute; top:30px;right:650px;')
                 @else
-                    <div class="slide-content-holder-content" style="position: absolute; top:80px;left:500px;">
+                    @php ($styles = 'position: absolute; top:80px;left:500px;')
                 @endif
-                        <div class="slide-title">
-                            {!! $slider->title !!}
-                        </div>
-                        <div class="slide-content" style="color:#fff">
-                            <p>{!! $slider->desc !!}</p>
-                        </div>
+                <div class="slide-content-holder-content" style="{{ $styles }}">
+                    <div class="slide-title">
+                        {!! $slider->title !!}
                     </div>
+                    <div class="slide-content" style="color:#fff">
+                        <p>{!! $slider->desc !!}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </li>
