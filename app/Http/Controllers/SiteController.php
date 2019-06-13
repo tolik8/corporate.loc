@@ -4,9 +4,9 @@ namespace Corp\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Arr;
-use Menu;
 use Corp\Repositories\MenusRepository;
+use Menu;
+use Arr;
 
 class SiteController extends Controller
 {
@@ -31,6 +31,11 @@ class SiteController extends Controller
 
         $navigation = view(env('THEME') . '.navigation')->with('menu', $menu)->render();
         $this->vars = Arr::add($this->vars, 'navigation', $navigation);
+
+        if ($this->contentRightBar) {
+            $rightBar = view(env('THEME').'.rightBar')->with('contentRightBar', $this->contentRightBar)->render();
+            $this->vars = Arr::add($this->vars, 'rightBar', $rightBar);
+        }
 
         return view($this->template)->with($this->vars);
     }

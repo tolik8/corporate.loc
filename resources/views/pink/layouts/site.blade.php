@@ -130,7 +130,7 @@
                     @yield('content')
                 <!-- END CONTENT -->
                 <!-- START SIDEBAR -->
-                    @yield('sidebar')
+                    @yield('bar')
                 <!-- END SIDEBAR -->
                 <!-- START EXTRA CONTENT -->
                 <!-- END EXTRA CONTENT -->

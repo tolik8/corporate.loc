@@ -12,6 +12,6 @@
 {!! $content !!}
 @endsection
 
-@section('sidebar')
-{!! $sidebar !!}
+@section('bar')
+{!! $rightBar !!}
 @endsection
