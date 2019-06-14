@@ -14,11 +14,14 @@ class SiteController extends Controller
     protected $s_rep;
     protected $a_rep;
     protected $m_rep;
+    protected $keywords;
+    protected $meta_desc;
+    protected $title;
     protected $template;
     protected $vars = [];
-    protected $bar = false;
     protected $contentRightBar = false;
     protected $contentLeftBar = false;
+    protected $bar = 'no';
 
     public function __construct(MenusRepository $m_rep)
     {
@@ -36,6 +39,14 @@ class SiteController extends Controller
             $rightBar = view(env('THEME').'.rightBar')->with('contentRightBar', $this->contentRightBar)->render();
             $this->vars = Arr::add($this->vars, 'rightBar', $rightBar);
         }
+        $this->vars = Arr::add($this->vars, 'bar', $this->bar);
+
+        $this->vars = Arr::add($this->vars, 'keywords', $this->keywords);
+        $this->vars = Arr::add($this->vars, 'meta_desc', $this->meta_desc);
+        $this->vars = Arr::add($this->vars, 'title', $this->title);
+
+        $footer = view(env('THEME') . '.footer')->render();
+        $this->vars = Arr::add($this->vars, 'footer', $footer);
 
         return view($this->template)->with($this->vars);
     }
@@ -46,7 +57,7 @@ class SiteController extends Controller
 
         $mBuilder = Menu::make('MyNav', function($m) use ($menu) {
             foreach ($menu as $item) {
-                if ($item->parent == 0) {
+                if ($item->parent === 0) {
                     $m->add($item->title, $item->path)->id($item->id);
                 } else {
                     if ($m->find($item->parent)) {

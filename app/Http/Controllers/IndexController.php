@@ -38,9 +38,13 @@ class IndexController extends SiteController
         $sliders = view(env('THEME') . '.slider')->with('sliders', $sliderItems)->render();
         $this->vars = Arr::add($this->vars, 'sliders', $sliders);
 
+        $this->keywords = 'HOME PAGE';
+        $this->meta_desc = 'HOME PAGE';
+        $this->title = 'HOME PAGE';
+
         $articles = $this->getArticles();
         $this->contentRightBar = view(env('THEME').'.indexBar')->with('articles', $articles)->render();
-        //$this->vars = Arr::add($this->vars, 'contentRightBar', $articles);
+        //$this->vars = Arr::add($this->vars, 'articles', $articles);
 
         return $this->renderOutput();
     }
