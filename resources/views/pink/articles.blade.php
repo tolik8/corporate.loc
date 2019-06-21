@@ -11,10 +11,9 @@
 
 
 @section('bar')
-	{!! $rightBar !!}
+    {!! $rightBar ?? '' !!}
 @endsection
 
 @section('footer')
 	{!! $footer !!}
 @endsection
-
