@@ -1,7 +1,7 @@
 <div id="content-blog" class="content group">
-	@if ($articles)
+	@if($articles)
 
-	@foreach ($articles as $article)
+	@foreach($articles as $article)
 		<div class="sticky hentry hentry-post blog-big group">
 			<!-- post featured & title -->
 			<div class="thumbnail">
@@ -31,6 +31,27 @@
 		</div>
 	@endforeach
 
-	<div class="general-pagination group"><a href="#" class="selected">1</a><a href="#">2</a><a href="#">&rsaquo;</a></div>
+	<div class="general-pagination group">
+        @if($articles->lastPage() > 1)
+            @if($articles->currentPage() !== 1)
+                <a href="{{ $articles->url($articles->currentPage() - 1) }}">{!! Lang::get('pagination.previous') !!}</a>
+            @endif
+
+            @for($i = 1; $i <= $articles->lastPage(); $i++)
+                @if($articles->currentPage() === $i)
+                    <a class="selected disabled">{{ $i }}</a>
+                @else
+                    <a href="{{ $articles->url($i) }}">{{ $i }}</a>
+                @endif
+            @endfor
+
+            @if($articles->currentPage() !== $articles->lastPage())
+                <a href="{{ $articles->url($articles->currentPage() + 1) }}">{!! Lang::get('pagination.next') !!}</a>
+            @endif
+        @endif
+{{--		<a href="#" class="selected">1</a><a href="#">2</a><a href="#">&rsaquo;</a>--}}
+    </div>
+    @else
+        <h2>{{ Lang::get('ru.articles_no') }}</h2>
 	@endif
 </div>
