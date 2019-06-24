@@ -8,5 +8,6 @@ return [
     'read_more' => 'Читать далее',
     'latest_projects' => 'Последние работы',
     'articles_no' => 'Записей нет',
+    'latest_comments' => 'Последние ответы',
 
 ];
