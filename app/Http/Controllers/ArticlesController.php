@@ -76,7 +76,10 @@ class ArticlesController extends SiteController
     public function show($alias = false)
     {
         $article = $this->a_rep->one($alias, ['comments' => true]);
-        dd($article);
+
+        if ($article) {
+            $article->img = json_decode($article->img);
+        }
 
         $content = view(env('THEME').'.article_content')->with('article', $article)->render();
         $this->vars = Arr::add($this->vars, 'content', $content);
@@ -86,18 +89,6 @@ class ArticlesController extends SiteController
         $this->contentRightBar = view(env('THEME').'.articlesBar')->with(['comments' => $comments, 'portfolios' => $portfolios]);
 
         return $this->renderOutput();
-    }
-
-    public function one($alias, $attr = [])
-    {
-        $article = parent::one($alias, $attr);
-
-        if ($article && !empty($attr)) {
-            $article->load('comments');
-            $article->comments->load('user');
-        }
-
-        return $article;
     }
 
 }
