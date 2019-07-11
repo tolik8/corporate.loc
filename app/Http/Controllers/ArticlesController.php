@@ -82,9 +82,12 @@ class ArticlesController extends SiteController
         }
 
         $content = view(env('THEME').'.article_content')->with('article', $article)->render();
+        dd($content);
         $this->vars = Arr::add($this->vars, 'content', $content);
+        dd($content);
 
         $comments = $this->getComments(config('settings.recent_comments'));
+        dd($comments);
         $portfolios = $this->getPortfolios(config('settings.recent_portfolios'));
         $this->contentRightBar = view(env('THEME').'.articlesBar')->with(['comments' => $comments, 'portfolios' => $portfolios]);
 
