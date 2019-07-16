@@ -6,13 +6,35 @@ jQuery(document).ready(function($){
 
     });
 
-    $('#commentform').on('click', '#submit', function() {
+    $('#commentform').on('click', '#submit', function(e) {
 
-        e.preventDefault();
+        e.defaultPrevented;
 
         var comParent = $(this);
 
-        $('.wrap_result').css('color', 'green').text('Сохранение комментария');
+        $('.wrap_result').
+            css('color', 'green').
+            text('Сохранение комментария').
+            fadeIn(500, function() {
+
+                var data = $('#commentform').serializeArray();
+
+                $.ajax({
+
+                    url: $('#commentform').attr('action'),
+                    data: data,
+                    type: 'POST',
+                    datatype: 'JSON',
+                    success: function(html) {
+
+                    },
+                    error: function() {
+
+                    }
+
+                });
+
+            });
 
     });
 

@@ -26,4 +26,4 @@ Route::resource('/articles', 'ArticlesController', [
 
 Route::get('articles/cat/{cat_alias?}', ['uses' => 'ArticlesController@index', 'as' => 'articlesCat']);
 
-Route::resource('comment','CommentController',['only'=>['store']]);
+Route::resource('comment', 'CommentController', ['only' => ['store']]);
