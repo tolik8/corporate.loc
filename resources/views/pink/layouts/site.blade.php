@@ -28,6 +28,8 @@
     <meta name="description" content="{{ $meta_desc ?? '' }}">
     <meta name="keywords" content="{{ $keywords ?? '' }}">
 
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <title>{{ $title ?? 'Pink' }}</title>
 
     <!-- [favicon] begin -->

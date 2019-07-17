@@ -34,7 +34,13 @@ class CommentController extends SiteController
      */
     public function store(Request $request)
     {
+        $data = $request->except('_token', 'comment_post_ID', 'comment_parent');
+
+        print_r($data);
+
         echo json_encode(['hello' => 'world']);
+
+        exit();
     }
 
     /**
