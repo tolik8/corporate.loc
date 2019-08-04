@@ -4,6 +4,7 @@ namespace Corp\Http\Controllers\Auth;
 
 use Corp\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
@@ -25,8 +26,9 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
     protected $loginView;
+    protected $username;
+    protected $redirectTo = '/admin';
 
     /**
      * Create a new controller instance.
@@ -39,4 +41,17 @@ class LoginController extends Controller
 
         $this->loginView = env('THEME') . '.login';
     }
+
+    public function showLoginForm()
+    {
+        $view = property_exists($this, 'loginView')
+            ? $this->loginView : '';
+
+        if (view()->exists($view)) {
+            return view($view)->with('title', 'Вход на сайт');
+        }
+
+        abort(404);
+    }
+
 }

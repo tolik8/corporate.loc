@@ -5,7 +5,7 @@ namespace Corp\Http\Controllers;
 use Illuminate\Http\Request;
 
 use Corp\Repositories\MenusRepository;
-use Menu;
+use Menu; // lavary/laravel-menu
 use Arr;
 
 class SiteController extends Controller
