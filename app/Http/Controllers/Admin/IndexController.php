@@ -16,7 +16,7 @@ class IndexController extends AdminController
         parent::__construct();
 
         if (Gate::denies('VIEW_ADMIN')) {
-            abort(403);
+            //abort(403);
         }
 
         $this->template = env('THEME').'.admin.index';

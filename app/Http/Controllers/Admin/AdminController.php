@@ -25,7 +25,7 @@ class AdminController extends \Corp\Http\Controllers\Controller
         $this->user = Auth::user();
 
         if (!$this->user) {
-            abort(403);
+            //abort(403);
         }
     }
 

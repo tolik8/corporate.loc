@@ -13,7 +13,7 @@ class Role extends Model
 
     public function perms()
     {
-        $this->belongsToMany('Corp\Permission', 'permission_role');
+        return $this->belongsToMany('Corp\Permission', 'permission_role');
     }
 
 }
