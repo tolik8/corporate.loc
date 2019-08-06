@@ -35,6 +35,10 @@ class ArticlesRepository extends Repository
         if (empty($data)) {
             return ['error' => 'Нет данных'];
         }
+
+        if (empty($data['alias'])) {
+            $data['alias'] = $this->transliterate($data['title']);
+        }
     }
 
 }
