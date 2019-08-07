@@ -9,6 +9,7 @@ use Corp\Repositories\ArticlesRepository;
 use Gate;
 use Corp\Category;
 use Corp\Http\Requests\ArticleRequest;
+use Corp\Article;
 
 class ArticlesController extends AdminController
 {
@@ -113,9 +114,10 @@ class ArticlesController extends AdminController
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
         //
+        //$article = Article::where('alias', $alias);
     }
 
     /**

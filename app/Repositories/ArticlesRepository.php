@@ -7,6 +7,7 @@ use Corp\Http\Requests\ArticleRequest;
 use Gate;
 use Image;
 use Str;
+use Config;
 
 class ArticlesRepository extends Repository
 {
@@ -61,7 +62,23 @@ class ArticlesRepository extends Repository
                 $obj->path = $str . '.jpg';
 
                 $img = Image::make($image);
-                dd($img);
+
+                $img->fit(Config::get('settings.image')['width'], Config::get('settings.image')['height'])
+                    ->save(public_path().'/'.env('THEME') . '/images/articles/' . $obj->path);
+
+                $img->fit(Config::get('settings.articles_img')['max']['width'], Config::get('articles_img.image')['max']['height'])
+                    ->save(public_path().'/'.env('THEME') . '/images/articles/' . $obj->max);
+
+                $img->fit(Config::get('settings.articles_img')['mini']['width'], Config::get('articles_img.image')['mini']['height'])
+                    ->save(public_path().'/'.env('THEME') . '/images/articles/' . $obj->mini);
+
+                $data['img'] = json_encode($obj);
+
+                $this->model->fill($data);
+
+                if ($request->user()->articles()->save($this->model)) {
+                    return ['status' => 'Материал добавлен'];
+                }
             }
         }
     }

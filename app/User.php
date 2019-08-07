@@ -82,7 +82,9 @@ class User extends Authenticatable
 
                 if ($hasRole && !$require) {
                     return true;
-                } elseif (!$hasRole && $require) {
+                }
+
+                if (!$hasRole && $require) {
                     return false;
                 }
             }
