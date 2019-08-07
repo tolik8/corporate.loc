@@ -6,8 +6,8 @@ use Corp\Comment;
 
 class CommentsRepository extends Repository
 {
-    public function __construct(Comment $comments)
+    public function __construct(Comment $comment)
     {
-        $this->model = $comments;
+        $this->model = $comment;
     }
 }

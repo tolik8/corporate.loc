@@ -74,6 +74,7 @@ class ArticlesController extends AdminController
                 $lists[$categories->where('id', $category->parent_id)->first()->title][$category->id] = $category->title;
             }
         }
+
         $this->content = view(env('THEME').'.admin.articles_create_content')->with('categories', $lists)->render();
 
         return $this->renderOutput();
@@ -118,6 +119,31 @@ class ArticlesController extends AdminController
     {
         //
         //$article = Article::where('alias', $alias);
+        dd($article);
+
+        if (Gate::denies('edit', new Article)) {
+            abort(403);
+        }
+
+        $article->img = json_decode($article->img);
+
+        $categories = Category::select(['title', 'alias', 'parent_id', 'id'])->get();
+
+        $lists = [];
+
+        foreach ($categories as $category) {
+            if ($category->parent_id == 0) {
+                $lists[$category->title] = [];
+            } else {
+                $lists[$categories->where('id', $category->parent_id)->first()->title][$category->id] = $category->title;
+            }
+        }
+
+        $this->title = 'Редактирование материала' . $article->title;
+
+        $this->content = view(env('THEME').'.admin.articles_create_content')->with(['categories', $lists, 'article' => $article])->render();
+
+        return $this->renderOutput();
     }
 
     /**

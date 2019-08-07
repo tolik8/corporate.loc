@@ -26,12 +26,12 @@ class ArticlesController extends SiteController
 
     public function index($cat_alias = false)
     {
-        $articles = $this->getArticles($cat_alias);
-
         $this->title = 'Блог';
         $this->keywords = 'String';
         $this->meta_desc = 'String';
 
+        $articles = $this->getArticles($cat_alias);
+        
         $content = view(env('THEME').'.articles_content')->with('articles', $articles)->render();
         $this->vars = Arr::add($this->vars, 'content', $content);
 
