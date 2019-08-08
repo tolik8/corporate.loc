@@ -25,7 +25,7 @@ class ArticleRequest extends FormRequest
             if($this->route()->hasParameter('articles')) {
                 $model = $this->route()->parameter('articles');
 
-                return ($model->alias !== $input->alias)  && !empty($input->alias);
+                return ($model->alias !== $input->alias) && !empty($input->alias);
             }
 
             return !empty($input->alias);
