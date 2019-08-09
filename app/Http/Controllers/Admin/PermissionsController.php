@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Corp\Http\Controllers\Controller;
 use Corp\Repositories\PermissionsRepository;
 use Corp\Repositories\RolesRepository;
+use Gate;
 
 class PermissionsController extends AdminController
 {
@@ -17,7 +18,7 @@ class PermissionsController extends AdminController
         parent::__construct();
 
         if (Gate::denies('EDIT_USERS')) {
-            abort(403);
+            //abort(403);
         }
 
         $this->per_rep = $per_rep;
@@ -35,7 +36,7 @@ class PermissionsController extends AdminController
     {
         //
 
-        $this->title = 'Менеджер прав пользователя';
+        $this->title = 'Менеджер прав пользователей';
 
         $roles = $this->getRoles();
         $permissions = $this->getPermissions();
@@ -79,6 +80,13 @@ class PermissionsController extends AdminController
     public function store(Request $request)
     {
         //
+        $result = $this->per_rep->changePermissions($request);
+
+        if (is_array($result) && !empty($result['error'])) {
+            return back()->with($result);
+        }
+
+        return back()->with($result);
     }
 
     /**

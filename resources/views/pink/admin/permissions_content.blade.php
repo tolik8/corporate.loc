@@ -12,14 +12,16 @@
 				
 				<thead>
 					
-					<th>Привилегии</th>
-					@if(!$roles->isEmpty())
-					
-						@foreach($roles as $item)
-							<th>{{ $item->name}}</th>
-						@endforeach
-					
-					@endif
+					<tr>
+						<th>Привилегии</th>
+						@if(!$roles->isEmpty())
+
+							@foreach($roles as $item)
+								<th>{{ $item->name}}</th>
+							@endforeach
+
+						@endif
+					</tr>
 					
 				</thead>
 				<tbody>
@@ -33,9 +35,9 @@
 									@foreach($roles as $role)
 										<td>
 											@if($role->hasPermission($val->name))
-												<input checked name=""  type="checkbox" value="">
+												<input checked name="{{ $role->id }}[]" type="checkbox" value="{{ $val->id }}">
 											@else
-												<input name=""  type="checkbox" value="">
+												<input name="{{ $role->id }}[]" type="checkbox" value="{{ $val->id }}">
 											@endif	
 										</td>
 									@endforeach
