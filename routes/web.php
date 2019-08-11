@@ -32,10 +32,7 @@ Route::resource('comment', 'CommentController', ['only' => ['store']]);
 Route::match(['get', 'post'], '/contacts', ['uses' => 'ContactsController@index', 'as' => 'contacts']);
 
 //php artisan make:auth
-//Route::get('login', 'Auth\AuthController@showLoginForm');
-//Route::post('login', 'Auth\AuthController@login');
-//Route::get('logout', 'Auth\AuthController@logout');
-
+//php artisan route:list
 Auth::routes();
 Route::match(['get', 'post'], '/logout', ['uses' => 'Auth\LoginController@logout', 'as' => 'logout']);
 
@@ -50,4 +47,6 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth'], function() {
     Route::resource('/permissions', 'Admin\PermissionsController', ['as' => 'admin']);
 
     Route::resource('/menus', 'Admin\MenusController', ['as' => 'admin']);
+
+    Route::resource('/users', 'Admin\UsersController', ['as' => 'admin']);
 });
