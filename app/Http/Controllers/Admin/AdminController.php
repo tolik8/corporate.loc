@@ -22,11 +22,18 @@ class AdminController extends \Corp\Http\Controllers\Controller
     protected $vars;
 
     public function __construct() {
-        $this->user = Auth::user();
 
-        if (!$this->user) {
-            //abort(403);
-        }
+        $this->middleware(function ($request, $next) {
+            $this->user = Auth::user();
+
+            if (!$this->user) {
+                abort(403);
+            }
+
+            return $next($request);
+        });
+
+
     }
 
     public function renderOutput() {
@@ -52,7 +59,7 @@ class AdminController extends \Corp\Http\Controllers\Controller
         return Menu::make('adminMenu', function($menu) {
             $menu->add('Статьи', ['route' => 'admin.articles.index']);
             $menu->add('Портфолио', ['route' => 'admin.articles.index']);
-            $menu->add('Меню', ['route' => 'admin.articles.index']);
+            $menu->add('Меню', ['route' => 'admin.menus.index']);
             $menu->add('Пользователи', ['route' => 'admin.articles.index']);
             $menu->add('Привилегии', ['route' => 'admin.permissions.index']);
         });

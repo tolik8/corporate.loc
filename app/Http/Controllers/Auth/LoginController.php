@@ -54,9 +54,9 @@ class LoginController extends Controller
         abort(404);
     }
 
-    public function logout()
+    public function username()
     {
-        return redirect('/');
+        return 'login';
     }
 
 }

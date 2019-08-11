@@ -33,7 +33,7 @@ class SiteController extends Controller
     {
         $menu = $this->getMenu();
 
-        $navigation = view(env('THEME') . '.navigation')->with('menu', $menu)->render();
+        $navigation = view($this->getTheme() . '.navigation')->with('menu', $menu)->render();
         $this->vars = Arr::add($this->vars, 'navigation', $navigation);
 
         if ($this->contentRightBar) {
@@ -75,6 +75,11 @@ class SiteController extends Controller
         });
 
         return $mBuilder;
+    }
+
+    public function getTheme()
+    {
+        return env('THEME');
     }
 
 }

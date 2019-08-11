@@ -49,7 +49,7 @@ class User extends Authenticatable
         return $this->belongsToMany('Corp\Role', 'role_user');
     }
 
-    // 'string'  array('View_Admin', 'ADD_ARTICLES')
+    // 'string'  array('VIEW_ADMIN', 'ADD_ARTICLES')
     public function canDo($permission, $require = false)
     {
         if (is_array($permission)) {
